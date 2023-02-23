@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.UUID;
 
 public class SBI_Account implements Bank{
@@ -15,7 +16,12 @@ public class SBI_Account implements Bank{
         if(this.balance<100000000) this.rateOfInterest=2.7;  // Considering Account as a Saving Account
         else this.rateOfInterest=3;
 
-        this.accountNo= String.valueOf(UUID.randomUUID());
+        //this.accountNo= String.valueOf(UUID.randomUUID());
+        String ac = String.valueOf(UUID.randomUUID());
+        String a=ac.replaceAll("-","");
+        String b= new BigInteger(a,16).toString();
+        this.accountNo=b.substring(0,11);
+
     }
 
     public String getName() {
@@ -78,7 +84,7 @@ public class SBI_Account implements Bank{
     }
 
     @Override
-    public double calculateInterest(int time) {  // Considering it's as a FD
+    public double calculateInterest(int time) {  // Considering it's as  FD
         return (balance*rateOfInterest*time)/100.0;
     }
 
